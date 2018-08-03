@@ -96,6 +96,9 @@ create_input <- function(inpath, outpath, wholeBird = F, varNames = c("VS.v", "S
   # Perform the PCA
   pca.fit <- prcomp(Y, scale = T)
 
+  # Record rotation matrix
+  pca.rotation <- pca.X$rotation
+
   # Visualize eigenvalues
   if(plotit) {
     plot(pca.fit)
@@ -161,6 +164,7 @@ create_input <- function(inpath, outpath, wholeBird = F, varNames = c("VS.v", "S
 
   }
 
-  return(pca.X)
+  # Return the subset of the points in PC space as well as a rotation matrix (to be able to project points into PC space)
+  return(list(pca.X, pca.rotation))
 
 }
