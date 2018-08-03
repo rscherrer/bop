@@ -4,12 +4,14 @@
 \alias{make_mean_pephylo}
 \title{Write PEPHYLO input mean traits}
 \usage{
-make_mean_pephylo(pcaOutput, outpath)
+make_mean_pephylo(pcaOutput, outpath, nPC)
 }
 \arguments{
 \item{pcaOutput}{Either a list or a \code{prcomp} object. If list, the first element must be a \code{prcomp} object.}
 
 \item{outpath}{A string. The path to the folder where the output file is to be saved.}
+
+\item{nPC}{How many PC to retain?}
 }
 \value{
 Returns 1 if succeeds. Saves the output file into the specified folder.

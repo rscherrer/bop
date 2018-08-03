@@ -4,12 +4,13 @@
 #'
 #' @param pcaOutput Either a list or a \code{prcomp} object. If list, the first element must be a \code{prcomp} object.
 #' @param outpath A string. The path to the folder where the output file is to be saved.
+#' @param nPC How many PC to retain?
 #' @return Returns 1 if succeeds. Saves the output file into the specified folder.
 #' @author Raphael Scherrer
 #' @export
 
 # Function to save the MetricTraitMeans.txt input file for pephylo
-make_mean_pephylo <- function(pcaOutput, outpath) {
+make_mean_pephylo <- function(pcaOutput, outpath, nPC) {
 
   # Input should be a list or a prcomp object
   # If list, the first element should be a PCA output
@@ -22,6 +23,9 @@ make_mean_pephylo <- function(pcaOutput, outpath) {
 
   # Extract the data from the PCA output
   pcaOutput <- pcaOutput$x
+
+  # Set the number of PC to retain
+  pcaOutput <- pcaOutput[,nPC]
 
   # Output file path
   outputFile <- paste(outpath, "MetricTraitMeans.txt", sep = "/")
