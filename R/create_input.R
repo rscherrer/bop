@@ -107,6 +107,9 @@ create_input <- function(inpath, outpath, wholeBird = F, varNames = c("VS.v", "S
   # Remove PC1 (= brightness)
   pca.X <- pca.X[,-1]
 
+  # Remove PC > 4
+  if(ncol(pca.X) > 3) pca.X <- pca.X[,1:3]
+
   # Attach metadata to the PCA table
   pca.X <- cbind(metaData, pca.X)
 
