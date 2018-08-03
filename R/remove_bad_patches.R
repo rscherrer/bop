@@ -21,12 +21,20 @@ remove_bad_patches <- function(specTab) {
   # Find out what patches are not present in ALL species and both sexes
   isData <- sapply(patchNames, function(curr.patch) {
 
-    # What species have data for this patch?
-    curr.species <- droplevels(specTab$species[specTab$patch == curr.patch])
+    # What species/sex have data for this patch?
+    curr.data <- droplevels(specTab[specTab$patch == curr.patch,])
+    curr.species <- curr.data$species
+    curr.sex <- curr.data$sex
 
-    # If males and females of each species have this patch
-    # The length of curr.species should be twice that of the number of species
-    answer <- length(curr.species) == 2 * length(speciesNames)
+    # What combinations of species and sex are there?
+    curr.combi <- paste(curr.species, curr.sex)
+
+    # There should be as many combinations as nSexes * nSpecies
+    nCombi <- length(unique(curr.combi))
+    nSpecies <- length(unique(curr.species))
+    nSexes <- length(unique(curr.sex))
+
+    return(nCombi != nSpecies * nSexes)
 
   })
 
