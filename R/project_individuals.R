@@ -10,7 +10,7 @@
 #' @export
 
 # Function to project individual specimens into the PC space defined by species-averages
-project_individuals <- function(inpath, pca, varNames) {
+project_individuals <- function(inpath, pca, varNames = c("VS.v", "S.v", "M.v", "L.v")) {
 
   # Check
   if(!inherits(pca, "list")) stop("pca must be a list")
