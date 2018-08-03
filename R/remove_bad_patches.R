@@ -34,7 +34,7 @@ remove_bad_patches <- function(specTab) {
     nSpecies <- length(unique(curr.species))
     nSexes <- length(unique(curr.sex))
 
-    return(nCombi != nSpecies * nSexes)
+    return(nCombi == nSpecies * nSexes)
 
   })
 
