@@ -55,7 +55,7 @@ rearrange_by_patch <- function(df) {
 
   # New column names that include patch ID
   newColNames <- expand.grid(varNames, patchNames)
-  newColNames <- apply(newColNames, 1, paste, collapse = ".")
+  newColNames <- apply(newColNames, 1, paste, collapse = "_")
   colnames(df)[!colnames(df) %in% c("species", "sex")] <- newColNames
 
   return(df)
