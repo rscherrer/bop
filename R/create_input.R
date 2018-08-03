@@ -94,7 +94,7 @@ create_input <- function(inpath, outpath, wholeBird = F, varNames = c("VS.v", "S
   metaData <- colorDF[,c("species", "sex")]
 
   # Perform the PCA
-  pca.fit <- prcomp(Y, scale = T)
+  pca.fit <- prcomp(Y, center = T, scale = T)
 
   # Record rotation matrix
   pca.rotation <- pca.fit$rotation
