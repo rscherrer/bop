@@ -35,6 +35,8 @@ pca_wholebird <- function(inpath, varNames = c("VS.v", "S.v", "M.v", "L.v")) {
   # Return PCA output
   out <- list(pca.fit, specTab)
 
+  names(out) <- c("output", "input")
+
   return(out)
 
 }
