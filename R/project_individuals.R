@@ -36,5 +36,9 @@ project_individuals <- function(inpath, pca, varNames = c("VS.v", "S.v", "M.v", 
   # Project the dependent variables into PC space
   Y <- scale(X, pca$output$center, pca$output$scale) %*% pca$output$rotation
 
-  return(Y)
+  # Output
+  out <- list(Y, indivData)
+  names(out) <- c("output", "input")
+
+  return(out)
 }
