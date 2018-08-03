@@ -4,7 +4,7 @@
 \alias{pca_wholebird}
 \title{Project bird species in PC space}
 \usage{
-pca_wholebird(inpath, varNames)
+pca_wholebird(inpath, varNames = c("VS.v", "S.v", "M.v", "L.v"))
 }
 \arguments{
 \item{inpath}{A string. The path to the folder where to find the input data file. Note: the input data file is named "specs.csv".}
