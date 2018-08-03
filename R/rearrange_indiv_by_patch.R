@@ -16,6 +16,9 @@ rearrange_indiv_by_patch <- function(indivData) {
   nPatches <- nlevels(indivData$patch)
   patchNames <- levels(indivData$patch)
 
+  # Get variable names
+  varNames <- colnames(indivData)[!colnames(indivData) %in% c("species", "sex", "patch", "specimen")]
+
   # Prepare new column names
   colNames <- expand.grid(varNames, patchNames)
   colNames <- apply(colNames, 1, paste, collapse = "_")
