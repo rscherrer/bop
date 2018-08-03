@@ -150,11 +150,14 @@ create_input <- function(inpath, outpath, wholeBird = F, varNames = c("VS.v", "S
   # Subset the sex of interest
   pca.X <- droplevels(pca.X[pca.X$sex == whatSex,])
 
+  # Remove metadata columns
+  pca.X2 <- pca.X[,-c(1,2)]
+
   # Save the data
   if(saveit) {
 
     outputFile <- paste(outpath, "MetricTraitMeans.txt", sep = "/")
-    write.table(pca.X, outputFile, col.names = F, row.names = F)
+    write.table(pca.X2, outputFile, col.names = F, row.names = F)
 
   }
 
