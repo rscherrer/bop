@@ -9,7 +9,7 @@
 #' @export
 
 # Function to project bird species in PC space
-pca_wholebird <- function(inpath, varNames) {
+pca_wholebird <- function(inpath, varNames = c("VS.v", "S.v", "M.v", "L.v")) {
 
   # Input file name
   filename <- "specs.csv"
