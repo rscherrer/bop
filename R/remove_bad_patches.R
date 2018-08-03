@@ -18,6 +18,10 @@ remove_bad_patches <- function(specTab) {
   patchNames <- levels(specTab$patch)
   speciesNames <- levels(specTab$species)
 
+  # Record the number of species and sexes in the dataset
+  nSpecies <- nlevels(specTab$species)
+  nSexes <- nlevels(specTab$sex)
+
   # Find out what patches are not present in ALL species and both sexes
   isData <- sapply(patchNames, function(curr.patch) {
 
@@ -31,8 +35,6 @@ remove_bad_patches <- function(specTab) {
 
     # There should be as many combinations as nSexes * nSpecies
     nCombi <- length(unique(curr.combi))
-    nSpecies <- length(unique(curr.species))
-    nSexes <- length(unique(curr.sex))
 
     return(nCombi == nSpecies * nSexes)
 
