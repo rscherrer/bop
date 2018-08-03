@@ -97,7 +97,7 @@ create_input <- function(inpath, outpath, wholeBird = F, varNames = c("VS.v", "S
   pca.fit <- prcomp(Y, scale = T)
 
   # Record rotation matrix
-  pca.rotation <- pca.X$rotation
+  pca.rotation <- pca.fit$rotation
 
   # Visualize eigenvalues
   if(plotit) {
