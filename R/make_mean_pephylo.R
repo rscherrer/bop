@@ -4,7 +4,7 @@
 #'
 #' @param pcaOutput Either a list or a \code{prcomp} object. If list, the first element must be a \code{prcomp} object.
 #' @param outpath A string. The path to the folder where the output file is to be saved.
-#' @param nPC How many PC to retain?
+#' @param nPC How many PC to retain? Either an integer i, then PC 1 to i will be retained, or a vector of integers representing what PCs to retain.
 #' @return Returns 1 if succeeds. Saves the output file into the specified folder.
 #' @author Raphael Scherrer
 #' @export
@@ -21,10 +21,19 @@ make_mean_pephylo <- function(pcaOutput, outpath, nPC) {
   # Now it should be a PCA output
   if(!inherits(pcaOutput, "prcomp")) stop("pcaOutput should be a prcomp object")
 
+  if(!inherits(nPC, c("numeric", "integer"))) stop("nPC should be one or several integers or numeric")
+
+  # Set the PCs to retain
+  if(length(nPC) == 1)  {
+    nPC <- seq_len(nPC)
+  }
+
+  nPC <- as.integer(nPC)
+
   # Extract the data from the PCA output
   pcaOutput <- pcaOutput$x
 
-  # Set the number of PC to retain
+  # Retain a subset of the PCs
   pcaOutput <- pcaOutput[,nPC]
 
   # Output file path

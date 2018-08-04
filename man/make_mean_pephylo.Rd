@@ -11,7 +11,7 @@ make_mean_pephylo(pcaOutput, outpath, nPC)
 
 \item{outpath}{A string. The path to the folder where the output file is to be saved.}
 
-\item{nPC}{How many PC to retain?}
+\item{nPC}{How many PC to retain? Either an integer i, then PC 1 to i will be retained, or a vector of integers representing what PCs to retain.}
 }
 \value{
 Returns 1 if succeeds. Saves the output file into the specified folder.
