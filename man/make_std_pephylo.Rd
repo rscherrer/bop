@@ -4,7 +4,7 @@
 \alias{make_std_pephylo}
 \title{Write PEPHYLO standard deviation input}
 \usage{
-make_std_pephylo(errors, nrows, outpath)
+make_std_pephylo(errors, nrows, outpath, whatSex)
 }
 \arguments{
 \item{errors}{A vector of standard deviations (errors on the means) for each dependent variable. The errors can be calculated with \code{bootrstrap_error}.}
@@ -12,6 +12,8 @@ make_std_pephylo(errors, nrows, outpath)
 \item{nrows}{An integer. The number of rows of the input table.}
 
 \item{outpath}{A string. The path to the folder where the output file is to be saved.}
+
+\item{whatSex}{A logical vector. The indices of the observations that are of the sex of interest.}
 }
 \value{
 Returns 1 if succeeds. Saves the output file into the specified folder.
