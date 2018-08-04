@@ -4,12 +4,14 @@
 \alias{bootstrap_error}
 \title{Bootstrap the standard deviation of the mean}
 \usage{
-bootstrap_error(x, N = 999)
+bootstrap_error(x, N = 999, printit = F)
 }
 \arguments{
 \item{x}{A vector of deviations from the mean (or any numbers).}
 
 \item{N}{An integer. The number of samplings to perform.}
+
+\item{printit}{Logical. Whether to print the iteration to the prompt.}
 }
 \value{
 The standard deviation of the re-calculated means of all bootstrapped samples.
