@@ -17,6 +17,8 @@ project_individuals <- function(inpath, pca, varNames = c("VS.v", "S.v", "M.v", 
   if(!all(c("input", "output") %in% names(pca))) stop("pca must have fields input and output")
   if(!inherits(pca$output, "prcomp")) stop("pca$output must be of class prcomp")
 
+  message("Projecting individuals...")
+
   # Read individual data
   filename <- "specs_indiv.csv"
   indivData <- read.csv(paste(inpath, filename, sep = "/"))
