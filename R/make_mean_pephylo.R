@@ -5,12 +5,13 @@
 #' @param pcaOutput Either a list or a \code{prcomp} object. If list, the first element must be a \code{prcomp} object.
 #' @param outpath A string. The path to the folder where the output file is to be saved.
 #' @param nPC How many PC to retain? Either an integer i, then PC 1 to i will be retained, or a vector of integers representing what PCs to retain.
+#' @param whatSex What sex to retain? Can be a character, either "M" or "F". In this case, \code{pcaOutput} should be a list, with metadata information contained in the second element. Alternatively, can be a logical vector of length the number of observations in the principal component, with \code{TRUE} for each observation of the right sex.
 #' @return Returns 1 if succeeds. Saves the output file into the specified folder.
 #' @author Raphael Scherrer
 #' @export
 
 # Function to save the MetricTraitMeans.txt input file for pephylo
-make_mean_pephylo <- function(pcaOutput, outpath, nPC) {
+make_mean_pephylo <- function(pcaOutput, outpath, nPC, whatSex) {
 
   # Input should be a list or a prcomp object
   # If list, the first element should be a PCA output
@@ -30,11 +31,23 @@ make_mean_pephylo <- function(pcaOutput, outpath, nPC) {
 
   nPC <- as.integer(nPC)
 
+  # Make a logical vector for the sex to retain
+  if(inherits(whatSex, "character")) {
+
+    if(!inherits(pcaOutput, "list")) stop("if whatSex is supplied as a character, pcaOutput should be a list of two elements, the second of which containing metadata")
+
+    # Turn sex into a logical
+    whatSex <- pcaOutput$input$sex == whatSex
+
+  }
+
+  if(!inherits(whatSex, "logical")) stop("whatSex should be logical by now")
+
   # Extract the data from the PCA output
   pcaOutput <- pcaOutput$x
 
-  # Retain a subset of the PCs
-  pcaOutput <- pcaOutput[,nPC]
+  # Retain a subset of the PCs + the sex of interest
+  pcaOutput <- pcaOutput[whatSex, nPC]
 
   # Output file path
   outputFile <- paste(outpath, "MetricTraitMeans.txt", sep = "/")

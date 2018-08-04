@@ -4,7 +4,7 @@
 \alias{make_mean_pephylo}
 \title{Write PEPHYLO input mean traits}
 \usage{
-make_mean_pephylo(pcaOutput, outpath, nPC)
+make_mean_pephylo(pcaOutput, outpath, nPC, whatSex)
 }
 \arguments{
 \item{pcaOutput}{Either a list or a \code{prcomp} object. If list, the first element must be a \code{prcomp} object.}
@@ -12,6 +12,8 @@ make_mean_pephylo(pcaOutput, outpath, nPC)
 \item{outpath}{A string. The path to the folder where the output file is to be saved.}
 
 \item{nPC}{How many PC to retain? Either an integer i, then PC 1 to i will be retained, or a vector of integers representing what PCs to retain.}
+
+\item{whatSex}{What sex to retain? Can be a character, either "M" or "F". In this case, \code{pcaOutput} should be a list, with metadata information contained in the second element. Alternatively, can be a logical vector of length the number of observations in the principal component, with \code{TRUE} for each observation of the right sex.}
 }
 \value{
 Returns 1 if succeeds. Saves the output file into the specified folder.
