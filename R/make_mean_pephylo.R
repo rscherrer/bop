@@ -13,24 +13,6 @@
 # Function to save the MetricTraitMeans.txt input file for pephylo
 make_mean_pephylo <- function(pcaOutput, outpath, nPC, whatSex) {
 
-  # Input should be a list or a prcomp object
-  # If list, the first element should be a PCA output
-  if(inherits(pcaOutput, "list")) {
-    pcaOutput <- pcaOutput[[1]]
-  }
-
-  # Now it should be a PCA output
-  if(!inherits(pcaOutput, "prcomp")) stop("pcaOutput should be a prcomp object")
-
-  if(!inherits(nPC, c("numeric", "integer"))) stop("nPC should be one or several integers or numeric")
-
-  # Set the PCs to retain
-  if(length(nPC) == 1)  {
-    nPC <- seq_len(nPC)
-  }
-
-  nPC <- as.integer(nPC)
-
   # Make a logical vector for the sex to retain
   if(inherits(whatSex, "character")) {
 
@@ -42,6 +24,24 @@ make_mean_pephylo <- function(pcaOutput, outpath, nPC, whatSex) {
   }
 
   if(!inherits(whatSex, "logical")) stop("whatSex should be logical by now")
+
+  # Input should be a list or a prcomp object
+  # If list, the first element should be a PCA output
+  if(inherits(pcaOutput, "list")) {
+    pcaOutput <- pcaOutput[[1]]
+  }
+
+  # Now it should be a PCA output
+  if(!inherits(pcaOutput, "prcomp")) stop("pcaOutput should be a prcomp object by now")
+
+  if(!inherits(nPC, c("numeric", "integer"))) stop("nPC should be one or several integers or numeric")
+
+  # Set the PCs to retain
+  if(length(nPC) == 1)  {
+    nPC <- seq_len(nPC)
+  }
+
+  nPC <- as.integer(nPC)
 
   # Extract the data from the PCA output
   pcaOutput <- pcaOutput$x
