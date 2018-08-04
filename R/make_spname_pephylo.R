@@ -15,7 +15,7 @@ make_spname_pephylo <- function(speciesNames, outpath) {
   outputFile <- paste(outpath, "MetricSpNames.txt", sep = "/")
 
   # Make a table
-  speciesNames <- as.factor(cbind(as.character(speciesNames)))
+  speciesNames <- levels(as.factor(cbind(as.character(speciesNames))))
 
   # Write output
   write.table(speciesNames, outputFile, col.names = F, row.names = F, quote = F)
