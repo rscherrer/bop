@@ -23,13 +23,13 @@ make_mean_pephylo <- function(data, outpath, nPC, whatSex) {
   }
 
   # Retain a subset of the PCs + the sex of interest
-  pcaOutput <- pcaOutput[whatSex, nPC]
+  data <- data[whatSex, nPC]
 
   # Output file path
   outputFile <- paste(outpath, "MetricTraitMeans.txt", sep = "/")
 
   # Write output
-  write.table(pcaOutput, outputFile, col.names = F, row.names = F)
+  write.table(data, outputFile, col.names = F, row.names = F)
 
   return(1)
 
