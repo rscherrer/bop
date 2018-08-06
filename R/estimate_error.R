@@ -67,6 +67,6 @@ estimate_error <- function(speciesData, indivData, nPC) {
 
   })
 
-  return(meanErrors)
+  return(t(meanErrors))
 
 }
