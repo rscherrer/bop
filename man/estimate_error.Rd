@@ -4,16 +4,12 @@
 \alias{estimate_error}
 \title{Estimate error on the means}
 \usage{
-estimate_error(speciesPC, indivPC, metaSpecies, metaIndiv, nPC)
+estimate_error(speciesData, indivData, nPC)
 }
 \arguments{
-\item{speciesPC}{A matrix containing the PC loadings for each species.}
+\item{speciesData}{A data frame with PC loadings and metadata at the species level.}
 
-\item{indivPC}{A matrix containing the PC loadings for each individual. Should have the same number of columns as \code{speciesPC}.}
-
-\item{metaSpecies}{A data frame containing species-level metadata, used to assign individuals to species.}
-
-\item{metaIndiv}{A data frame containing individual-level metadata.}
+\item{indivData}{A data frame with PC loadings and metadata at the individual level.}
 
 \item{nPC}{How many PC to retain? Either an integer i, then PC 1 to i will be retained, or a vector of integers representing what PCs to retain.}
 }
