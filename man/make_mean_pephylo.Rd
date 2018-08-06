@@ -7,13 +7,13 @@
 make_mean_pephylo(pcaOutput, outpath, nPC, whatSex)
 }
 \arguments{
-\item{pcaOutput}{Either a list or a \code{prcomp} object. If list, the first element must be a \code{prcomp} object.}
+\item{pcaOutput}{Typically the output of \code{pca_wholebird} or \code{pca_perpatch}. In the fomer case, can be a \code{prcomp} object, or a list, whose first element must be a \code{prcomp} object. In the latter case, a list of two data frames. The first one contains the PC loadings for each patch in columns and the species in rows, and the second contains the data fed ot the PCA i.e. quantum catches in columns and patches per species in rows.}
 
 \item{outpath}{A string. The path to the folder where the output file is to be saved.}
 
 \item{nPC}{How many PC to retain? Either an integer i, then PC 1 to i will be retained, or a vector of integers representing what PCs to retain.}
 
-\item{whatSex}{What sex to retain? Can be a character, either "M" or "F". In this case, \code{pcaOutput} should be a list, with metadata information contained in the second element. Alternatively, can be a logical vector of length the number of observations in the principal component, with \code{TRUE} for each observation of the right sex.}
+\item{whatSex}{A logical vector of length the number of observations in the principal component, with \code{TRUE} for each observation of the right sex.}
 }
 \value{
 Returns 1 if succeeds. Saves the output file into the specified folder.

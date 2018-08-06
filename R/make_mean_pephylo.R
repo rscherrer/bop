@@ -2,26 +2,16 @@
 #'
 #' This function saves the MetricTraitMeans.txt input file for PEPHYLO.
 #'
-#' @param pcaOutput Either a list or a \code{prcomp} object. If list, the first element must be a \code{prcomp} object.
+#' @param pcaOutput Typically the output of \code{pca_wholebird} or \code{pca_perpatch}. In the fomer case, can be a \code{prcomp} object, or a list, whose first element must be a \code{prcomp} object. In the latter case, a list of two data frames. The first one contains the PC loadings for each patch in columns and the species in rows, and the second contains the data fed ot the PCA i.e. quantum catches in columns and patches per species in rows.
 #' @param outpath A string. The path to the folder where the output file is to be saved.
 #' @param nPC How many PC to retain? Either an integer i, then PC 1 to i will be retained, or a vector of integers representing what PCs to retain.
-#' @param whatSex What sex to retain? Can be a character, either "M" or "F". In this case, \code{pcaOutput} should be a list, with metadata information contained in the second element. Alternatively, can be a logical vector of length the number of observations in the principal component, with \code{TRUE} for each observation of the right sex.
+#' @param whatSex A logical vector of length the number of observations in the principal component, with \code{TRUE} for each observation of the right sex.
 #' @return Returns 1 if succeeds. Saves the output file into the specified folder.
 #' @author Raphael Scherrer
 #' @export
 
 # Function to save the MetricTraitMeans.txt input file for pephylo
 make_mean_pephylo <- function(pcaOutput, outpath, nPC, whatSex) {
-
-  # Make a logical vector for the sex to retain
-  if(inherits(whatSex, "character")) {
-
-    if(!inherits(pcaOutput, "list")) stop("if whatSex is supplied as a character, pcaOutput should be a list of two elements, the second of which containing metadata")
-
-    # Turn sex into a logical
-    whatSex <- pcaOutput$input$sex == whatSex
-
-  }
 
   if(!inherits(whatSex, "logical")) stop("whatSex should be logical by now")
 
@@ -32,19 +22,26 @@ make_mean_pephylo <- function(pcaOutput, outpath, nPC, whatSex) {
   }
 
   # Now it should be a PCA output
-  if(!inherits(pcaOutput, "prcomp")) stop("pcaOutput should be a prcomp object by now")
+  #if(!inherits(pcaOutput, "prcomp")) stop("pcaOutput should be a prcomp object by now")
 
   if(!inherits(nPC, c("numeric", "integer"))) stop("nPC should be one or several integers or numeric")
+
+  # Extract the data from the PCA output (if prcomp object returned from pca_wholebird)
+  if(inherits(pcaOutput, "prcomp")) {
+
+    pcaOutput <- pcaOutput$x
+
+  } else {
+
+    # But if pcaOutput is the output of pca_perpatch, just remove the first column which contains species information
+    pcaOutput <- pcaOutput[,-1]
+
+  }
 
   # Set the PCs to retain
   if(length(nPC) == 1)  {
     nPC <- seq_len(nPC)
   }
-
-  nPC <- as.integer(nPC)
-
-  # Extract the data from the PCA output
-  pcaOutput <- pcaOutput$x
 
   # Retain a subset of the PCs + the sex of interest
   pcaOutput <- pcaOutput[whatSex, nPC]
