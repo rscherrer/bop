@@ -9,7 +9,7 @@ project_individuals(inpath, pca, varNames = c("VS.v", "S.v", "M.v", "L.v"))
 \arguments{
 \item{inpath}{A string. The path to the folder where to find the input data file. Note: the input data file is named "specs_indiv.csv".}
 
-\item{pca}{A list with fields \code{input} and \code{output}, where \code{output} is a \code{prcomp} object. Typically the output of \code{pca_wholebird} or \code{pca_perpatch}.}
+\item{pca}{A \code{prcomp} object.}
 
 \item{varNames}{A vector of strings. The names of the dependent variables in the input data frame.}
 }
