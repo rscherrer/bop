@@ -35,6 +35,6 @@ pca_perpatch <- function(inpath, varNames = c("VS.v", "S.v", "M.v", "L.v")) {
   pca.coord <- rearrange_by_patch(pca.coord)
 
   # Return input and output
-  return(list(input = specTab, output = pca.coord))
+  return(list(output = pca.coord, input = specTab))
 
 }
