@@ -5,12 +5,13 @@
 #' @param speciesData A data frame with PC loadings and metadata at the species level.
 #' @param indivData A data frame with PC loadings and metadata at the individual level.
 #' @param nPC How many PC to retain? Either an integer i, then PC 1 to i will be retained, or a vector of integers representing what PCs to retain.
+#' @param wholeBird Logical. Whether the analysis is conducted per bird (T) or per patch (F).
 #' @return A vector of estimated errors, one for each dependent variable defined by \code{nPC}.
 #' @author Raphael Scherrer
 #' @export
 
 # Function to bootstrap the error made on the means
-estimate_error <- function(speciesData, indivData, nPC) {
+estimate_error <- function(speciesData, indivData, nPC, wholeBird = T) {
 
   if(!inherits(nPC, "numeric")) stop("nPC should be numeric")
 
@@ -18,6 +19,8 @@ estimate_error <- function(speciesData, indivData, nPC) {
   if(length(nPC) == 1)  {
     nPC <- seq_len(nPC)
   }
+
+  indivData <- indivData[, colnames(indivData) != "specimen"]
 
   # Pseudocode
   # Produce a data frame with the deviation from the mean for each individual
@@ -39,9 +42,14 @@ estimate_error <- function(speciesData, indivData, nPC) {
     # What species and what sex?
     curr.species <- indivData[i, "species"]
     curr.sex <- indivData[i, "sex"]
+    if(!wholeBird) curr.patch <- indivData[i, "patch"]
 
     # What row contains the data for the mean of that species?
-    idx <- with(speciesData, species == curr.species & sex == curr.sex,)
+    if(wholeBird) {
+      idx <- with(speciesData, species == curr.species & sex == curr.sex)
+    } else {
+      idx <- with(speciesData, species == curr.species & sex == curr.sex & patch == curr.patch)
+    }
 
     # Substract the data to get deviations from the mean
     deviations <- indivData[i, numcols.ind] - speciesData[idx, numcols.sp]

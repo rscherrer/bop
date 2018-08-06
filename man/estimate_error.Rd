@@ -4,7 +4,7 @@
 \alias{estimate_error}
 \title{Estimate error on the means}
 \usage{
-estimate_error(speciesData, indivData, nPC)
+estimate_error(speciesData, indivData, nPC, wholeBird = T)
 }
 \arguments{
 \item{speciesData}{A data frame with PC loadings and metadata at the species level.}
@@ -12,6 +12,8 @@ estimate_error(speciesData, indivData, nPC)
 \item{indivData}{A data frame with PC loadings and metadata at the individual level.}
 
 \item{nPC}{How many PC to retain? Either an integer i, then PC 1 to i will be retained, or a vector of integers representing what PCs to retain.}
+
+\item{wholeBird}{Logical. Whether the analysis is conducted per bird (T) or per patch (F).}
 }
 \value{
 A vector of estimated errors, one for each dependent variable defined by \code{nPC}.
