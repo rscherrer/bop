@@ -34,7 +34,7 @@ project_individuals <- function(inpath, pca, varNames = c("VS.v", "S.v", "M.v", 
   }
 
   # Record metadata
-  metadata <- indivData[,c("species", "sex", "specimen")]
+  metadata <- indivData[,c("species", "sex", "specimen", "patch")]
 
   # Dependent variables
   X <- indivData[,sapply(indivData, class) == "numeric"]
