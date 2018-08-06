@@ -4,7 +4,7 @@
 #'
 #' @param inpath A string. The path to the folder where to find the input data file. Note: the input data file is named "specs.csv".
 #' @param varNames A vector of strings. The names of the dependent variables in the input data frame.
-#' @return A \code{prcomp} object.
+#' @return A list of two elements. The first is the output of \code{prcomp} performed on the dependent variables, where each bird has coordinates. The second element a table with metadata identifying each observation in the PCA.
 #' @author Raphael Scherrer
 #' @export
 
@@ -29,6 +29,9 @@ pca_perpatch <- function(inpath, varNames = c("VS.v", "S.v", "M.v", "L.v")) {
   # Perform Principal Component Analysis
   pca.fit <- prcomp(X, center = T, scale = T)
 
-  return(pca.fit)
+  # Keep track for metadata
+  metadata <- specTab[,c("species", "sex", "patch")]
+
+  return(list(res = pca.fit, metadata = metadata))
 
 }

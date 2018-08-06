@@ -12,7 +12,7 @@ pca_perpatch(inpath, varNames = c("VS.v", "S.v", "M.v", "L.v"))
 \item{varNames}{A vector of strings. The names of the dependent variables in the input data frame.}
 }
 \value{
-A \code{prcomp} object.
+A list of two elements. The first is the output of \code{prcomp} performed on the dependent variables, where each bird has coordinates. The second element a table with metadata identifying each observation in the PCA.
 }
 \description{
 This function performs a Principal Component Analysis from quantum catches measured on different patches on the plumage. Each bird is represented by several patches, so several points.
