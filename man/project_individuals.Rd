@@ -14,7 +14,7 @@ project_individuals(inpath, pca, varNames = c("VS.v", "S.v", "M.v", "L.v"))
 \item{varNames}{A vector of strings. The names of the dependent variables in the input data frame.}
 }
 \value{
-A matrix of principal component coordinates.
+A data frame of principal component coordinates and metadata.
 }
 \description{
 This projects individual specimens into the PC space defined by species-averages.
