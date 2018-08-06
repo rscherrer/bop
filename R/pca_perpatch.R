@@ -30,7 +30,7 @@ pca_perpatch <- function(inpath, varNames = c("VS.v", "S.v", "M.v", "L.v")) {
   pca.fit <- prcomp(X, center = T, scale = T)
 
   # Rearrange output
-  pca.coord <- data.frame(species = specTab$species, patch = specTab$patch, pca.fit$x)
+  pca.coord <- data.frame(species = specTab$species, sex = specTab$sex, patch = specTab$patch, pca.fit$x)
 
   pca.coord <- rearrange_by_patch(pca.coord)
 
