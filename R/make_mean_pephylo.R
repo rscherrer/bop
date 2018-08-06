@@ -34,7 +34,7 @@ make_mean_pephylo <- function(pcaOutput, outpath, nPC, whatSex) {
   } else {
 
     # But if pcaOutput is the output of pca_perpatch, just remove the first column which contains species information
-    pcaOutput <- pcaOutput[,-1]
+    pcaOutput <- pcaOutput[,-c(1,2)]
 
   }
 
