@@ -7,7 +7,7 @@
 make_mean_pephylo(pcaOutput, outpath, nPC, whatSex)
 }
 \arguments{
-\item{pcaOutput}{Typically the output of \code{pca_wholebird} or \code{pca_perpatch}. In the fomer case, can be a \code{prcomp} object, or a list, whose first element must be a \code{prcomp} object. In the latter case, a list of two data frames. The first one contains the PC loadings for each patch in columns and the species in rows, and the second contains the data fed ot the PCA i.e. quantum catches in columns and patches per species in rows.}
+\item{pcaOutput}{Typically the output of \code{pca_wholebird} or \code{pca_perpatch}. In the fomer case, can be a \code{prcomp} object, or a list, whose first element must be a \code{prcomp} object. In the latter case, a list of three elements. The first one contains the PC loadings for each patch in columns and the species in rows, and the second contains the data fed ot the PCA i.e. quantum catches in columns and patches per species in rows. The last element is a prcomp object.}
 
 \item{outpath}{A string. The path to the folder where the output file is to be saved.}
 
