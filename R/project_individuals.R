@@ -5,12 +5,13 @@
 #' @param inpath A string. The path to the folder where to find the input data file. Note: the input data file is named "specs_indiv.csv".
 #' @param pca A \code{prcomp} object.
 #' @param varNames A vector of strings. The names of the dependent variables in the input data frame.
+#' @param wholeBird Whether the current analysis is per species (T) or per patch (F). If TRUE, the individual data are rearranged by patch prior to PCA, otherwise not.
 #' @return A data frame of principal component coordinates and metadata.
 #' @author Raphael Scherrer
 #' @export
 
 # Function to project individual specimens into the PC space defined by species-averages
-project_individuals <- function(inpath, pca, varNames = c("VS.v", "S.v", "M.v", "L.v")) {
+project_individuals <- function(inpath, pca, varNames = c("VS.v", "S.v", "M.v", "L.v"), wholeBird = T) {
 
   # Check
   if(!inherits(pca, "prcomp")) stop("pca must be a prcomp object")
@@ -27,8 +28,10 @@ project_individuals <- function(inpath, pca, varNames = c("VS.v", "S.v", "M.v", 
   # Extract the dependent variables
   indivData <- indivData[, c("species", "sex", "patch", "specimen", varNames)]
 
-  # Rearrange by patch
-  indivData <- rearrange_indiv_by_patch(indivData)
+  # Rearrange by patch if whole bird
+  if(wholeBird) {
+    indivData <- rearrange_indiv_by_patch(indivData)
+  }
 
   # Record metadata
   metadata <- indivData[,c("species", "sex", "specimen")]

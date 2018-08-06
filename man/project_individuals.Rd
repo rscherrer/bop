@@ -4,7 +4,8 @@
 \alias{project_individuals}
 \title{Project individuals into PC space}
 \usage{
-project_individuals(inpath, pca, varNames = c("VS.v", "S.v", "M.v", "L.v"))
+project_individuals(inpath, pca, varNames = c("VS.v", "S.v", "M.v", "L.v"),
+  wholeBird = T)
 }
 \arguments{
 \item{inpath}{A string. The path to the folder where to find the input data file. Note: the input data file is named "specs_indiv.csv".}
@@ -12,6 +13,8 @@ project_individuals(inpath, pca, varNames = c("VS.v", "S.v", "M.v", "L.v"))
 \item{pca}{A \code{prcomp} object.}
 
 \item{varNames}{A vector of strings. The names of the dependent variables in the input data frame.}
+
+\item{wholeBird}{Whether the current analysis is per species (T) or per patch (F). If TRUE, the individual data are rearranged by patch prior to PCA, otherwise not.}
 }
 \value{
 A data frame of principal component coordinates and metadata.
