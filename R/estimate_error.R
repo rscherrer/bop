@@ -19,50 +19,44 @@ estimate_error <- function(speciesData, indivData, nPC) {
     nPC <- seq_len(nPC)
   }
 
-  # Label each species-level point
-  speciesLabs <- with(speciesData, paste(species, sex))
+  # Pseudocode
+  # Produce a data frame with the deviation from the mean for each individual
+  # For each individual, look at what species it belongs to
+  # What is the mean for that species?
+  # Do the substraction, fill in the data frame
 
-  # Individual labels
-  indivLabs <- with(indivData, paste(species, sex))
+  # Get numerical columns
+  numcols.ind <- which(sapply(indivData, is.numeric))
+  numcols.sp <- which(sapply(speciesData, is.numeric))
 
-  # For each species point, tell what individuals belong to it
-  groupID <- lapply(seq_along(speciesLabs), function(i){
+  if(length(numcols.ind) != length(numcols.sp)) stop("indivData and speciesData should have the same number of numerical columns")
 
-    # What is the current point?
-    curr.point <- speciesLabs[i]
+  message("Calculating deviations from the means...")
 
-    # What are its dependent variables?
-    curr.data <- speciesData[i, sapply(speciesData, is.numeric)]
+  # For each individual, get deviations from the mean...
+  deviations <- lapply(seq_len(nrow(indivData)), function(i) {
 
-    # What individuals match that point?
-    curr.indiv <- indivLabs == curr.point
+    # What species and what sex?
+    curr.species <- indivData[i, "species"]
+    curr.sex <- indivData[i, "sex"]
 
-    return(curr.indiv)
+    # What row contains the data for the mean of that species?
+    idx <- with(speciesData, species == curr.species & sex == curr.sex,)
+
+    # Substract the data to get deviations from the mean
+    deviations <- indivData[i, numcols.ind] - speciesData[idx, numcols.sp]
+
+    return(deviations)
 
   })
 
-  # Make a matrix for the species-level point each individual is related to
-  indivAvg <- matrix(NA, ncol = ncol(indivData[,sapply(indivData, is.numeric)]), nrow = nrow(indivData))
-
-  # Fill in the matrix for each species-level point
-  for(i in seq_along(groupID)) {
-
-    # What is the index of the current species-level point?
-    idx <- groupID[[i]]
-
-    # Use it to fill in the matrix with the average dependent variables for the current species
-    indivAvg[idx,] <- speciesData[i,sapply(speciesData, is.numeric)]
-
-  }
-
-  # Calculate deviations from the mean
-  indivDev <- indivPC - indivAvg
+  deviations <- do.call("rbind", deviations)
 
   # Bootstrap the error on the mean for each principal component
   meanErrors <- sapply(nPC, function(i) {
 
     # Current principal component
-    curr.dev <- indivDev[,i]
+    curr.dev <- deviations[,i]
 
     message(paste0("Bootstrapping variable ", i, "..."))
 
