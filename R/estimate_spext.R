@@ -1,6 +1,6 @@
 #' Esimate speciation and extinction
 #'
-#' This function fits Nee's likelihood function to one or more trees and returns the estimated speciation and extinction rates by maximum likelihood. If several trees are input, the average of those is returned.
+#' This function fits Nee's likelihood function to one or more trees and returns the estimated speciation and extinction rates by maximum likelihood, as well as the average age of all trees. If several trees are input, the average of those is returned.
 #'
 #' @param treepath A path to where the tree file is. The tree file should be named "Tress.txt" and be in Newick format. It may contain several trees.
 #' @return A vector with a speciation and an extinction rate.
@@ -34,9 +34,12 @@ estimate_spext <- function(treepath) {
     b <- netdiv / (1 - turnover)
     d <- b - netdiv
 
+    # Age of the clade
+    age <- max(node.depth.edgelength(tree))
+
     # Concatenate and return
-    spext <- c(b, d)
-    names(spext) <- NULL
+    spext <- c(b, d, age)
+    names(spext) <- c("b", "d", "age")
     return(spext)
   })
 

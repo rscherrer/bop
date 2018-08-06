@@ -13,7 +13,7 @@ estimate_spext(treepath)
 A vector with a speciation and an extinction rate.
 }
 \description{
-This function fits Nee's likelihood function to one or more trees and returns the estimated speciation and extinction rates by maximum likelihood. If several trees are input, the average of those is returned.
+This function fits Nee's likelihood function to one or more trees and returns the estimated speciation and extinction rates by maximum likelihood, as well as the average age of all trees. If several trees are input, the average of those is returned.
 }
 \note{
 \code{ape} is a dependency.
