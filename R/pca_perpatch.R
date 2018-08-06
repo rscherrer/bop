@@ -4,7 +4,7 @@
 #'
 #' @param inpath A string. The path to the folder where to find the input data file. Note: the input data file is named "specs.csv".
 #' @param varNames A vector of strings. The names of the dependent variables in the input data frame.
-#' @return A list of two elements. The first is the output data frame with principal component loadings, rearranged so that patches are in columns. That way, each species has a single row. The second element is the table of dependent variables measured on each patch and on which the PCA was performed. Returns the prcomp object from the PCA as well.
+#' @return A \code{prcomp} object.
 #' @author Raphael Scherrer
 #' @export
 
@@ -29,12 +29,6 @@ pca_perpatch <- function(inpath, varNames = c("VS.v", "S.v", "M.v", "L.v")) {
   # Perform Principal Component Analysis
   pca.fit <- prcomp(X, center = T, scale = T)
 
-  # Rearrange output
-  pca.coord <- data.frame(species = specTab$species, sex = specTab$sex, patch = specTab$patch, pca.fit$x)
-
-  pca.coord <- rearrange_by_patch(pca.coord)
-
-  # Return input and output
-  return(list(output = pca.coord, input = specTab, prcomp = pca.fit))
+  return(pca.fit)
 
 }
