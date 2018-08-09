@@ -17,7 +17,7 @@ estimate_spext <- function(treepath) {
   # Load trees
   trees <- ape::read.tree(paste(treepath, "Trees.txt", sep = "/"))
 
-  trees <- list(trees)
+  if(!inherits(trees, "multiPhylo")) trees <- list(trees)
 
   # Fit Nee's ML to each tree
   spext <- lapply(trees, function(tree) {
