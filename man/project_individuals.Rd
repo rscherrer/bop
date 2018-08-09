@@ -4,8 +4,8 @@
 \alias{project_individuals}
 \title{Project individuals into PC space}
 \usage{
-project_individuals(inpath, pca, varNames = c("VS.v", "S.v", "M.v", "L.v"),
-  wholeBird = T)
+project_individuals(inpath, pca, varNames = c("VS.v", "S.v", "M.v",
+  "L.v"), wholeBird = T)
 }
 \arguments{
 \item{inpath}{A string. The path to the folder where to find the input data file. Note: the input data file is named "specs_indiv.csv".}

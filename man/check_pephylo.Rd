@@ -4,12 +4,14 @@
 \alias{check_pephylo}
 \title{View PEPHYLO input files}
 \usage{
-check_pephylo(filename, outpath)
+check_pephylo(filename, outpath, plotit = T)
 }
 \arguments{
-\item{filename}{Either a string with the name of the file to be viewed, either of "MetricTraitMeans", "MetricTraitStds", "MetricSpNames", "SpExt" or "MetricRates", with or without the ".txt" extension. Or, an integer representing the position of the file to view in the list described in the previous sentence.}
+\item{filename}{Either a string with the name of the file to be viewed, either of "MetricTraitMeans", "MetricTraitStds", "MetricSpNames", "SpExt", "MetricRates" or "Trees", with or without the ".txt" extension. Or, an integer representing the position of the file to view in the list described in the previous sentence.}
 
 \item{outpath}{A string. The path to the folder where the output file is to be saved.}
+
+\item{plotit}{Logical. Whether to plot the first phylogeny provided (applicable only if filename is Trees.txt or 6).}
 }
 \value{
 Displays the content of the file using \code{View}.
