@@ -27,7 +27,7 @@ is_matching_names <- function(outpath) {
   if(all(isInTree)) {
     message("All observed species are in tree :)")
   } else {
-    missing <- paste(spnames.obs(!isInTree), collapse = ", ")
+    missing <- paste(spnames.obs[!isInTree], collapse = ", ")
     message(paste("Species are missing from tree:", missing, sep = " "))
   }
 
@@ -36,7 +36,7 @@ is_matching_names <- function(outpath) {
   if(all(isInObs)) {
     message("All species in tree are observed")
   } else {
-    missing <- paste(spnames.tre(!isInObs), collapse = ", ")
+    missing <- paste(spnames.tre[!isInObs], collapse = ", ")
     message(paste("Species are not observed:", missing, sep = " "))
   }
 
