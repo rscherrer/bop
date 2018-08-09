@@ -11,8 +11,8 @@
 is_matching_names <- function(outpath) {
 
   # Check folder
-  if("MetricSpNames.txt" %in% list.files(outpath)) stop("MetricSpNames.txt should be in outpath")
-  if("Trees.txt" %in% list.files(outpath)) stop("Trees.txt should be in outpath")
+  if(!"MetricSpNames.txt" %in% list.files(outpath)) stop("MetricSpNames.txt should be in outpath")
+  if(!"Trees.txt" %in% list.files(outpath)) stop("Trees.txt should be in outpath")
 
   # Load files
   spnames.obs <- read.table(paste(outpath, "MetricSpNames.txt", sep = "/"))
