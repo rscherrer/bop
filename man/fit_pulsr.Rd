@@ -2,7 +2,7 @@
 % Please edit documentation in R/fit_pulsr.R
 \name{fit_pulsr}
 \alias{fit_pulsr}
-\title{Function to test all 9 models on a phenotypic vector, nrepet times}
+\title{Fit repeated pulsR}
 \usage{
 fit_pulsr(trait_vector, tree, species_names, model_types, nrepet)
 }

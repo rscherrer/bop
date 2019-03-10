@@ -1,4 +1,4 @@
-#' Function to test all 9 models on a phenotypic vector, nrepet times
+#' Fit repeated pulsR
 #'
 #' This function fits (potentially) several models of evolution on a phenotypic vector using Levy processes from the package pulsr. Each fitting can be replicated to ensure convergence to a single optimum likelihood.
 #'
