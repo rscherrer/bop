@@ -5,7 +5,6 @@
 #' @note This functions saves an RDS file into each dataset-folder, named "results_all_variables.rds".
 #' @author Raphael Scherrer
 #' @export
-
 combine_pulsr_results <- function(path) {
 
   homedir <- getwd()
@@ -22,7 +21,11 @@ combine_pulsr_results <- function(path) {
     results_all_variables <- lapply(seq_along(list.files()), function(curr_variable_id) {
 
       setwd(paste("variable", curr_variable_id, sep = "_"))
-      results <- readRDS(list.files()[grep(".rds", list.files())])
+      if(length(grep(".rds", list.files())) == 1) {
+        results <- readRDS(list.files()[grep(".rds", list.files())])
+      } else {
+        results <- NULL
+      }
       setwd("..")
       return(results)
 
@@ -39,4 +42,3 @@ combine_pulsr_results <- function(path) {
 
 
 }
-
